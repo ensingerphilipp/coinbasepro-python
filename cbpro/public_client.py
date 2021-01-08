@@ -191,8 +191,8 @@ class PublicClient(object):
         if granularity is not None:
             acceptedGrans = [60, 300, 900, 3600, 21600, 86400]
             if granularity not in acceptedGrans:
-                raise ValueError( 'Specified granularity is {}, must be in approved values: {}'.format(
-                        granularity, acceptedGrans) )
+                raise ValueError('Specified granularity is {}, must be in approved values: {}'.format(
+                    granularity, acceptedGrans))
 
             params['granularity'] = granularity
         return self._send_message('get',
@@ -267,7 +267,7 @@ class PublicClient(object):
         url = self.url + endpoint
         r = self.session.request(method, url, params=params, data=data,
                                  auth=self.auth, timeout=30)
-        return r.json()
+        return {'data': r.json(), 'status_code': r.status_code}
 
     def _send_paginated_message(self, endpoint, params=None):
         """ Send API message that results in a paginated response.
